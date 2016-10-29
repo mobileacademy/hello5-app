@@ -13,6 +13,7 @@
 		91824AA01DC45DA400615F5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91824A9F1DC45DA400615F5B /* Assets.xcassets */; };
 		91824AA31DC45DA400615F5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91824AA11DC45DA400615F5B /* LaunchScreen.storyboard */; };
 		91824AAE1DC45DA400615F5B /* hello5_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91824AAD1DC45DA400615F5B /* hello5_appTests.swift */; };
+		F86B862F580250F0A9703ECA /* Pods_hello5_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78E40C9F4A45C39467904738 /* Pods_hello5_app.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		78E40C9F4A45C39467904738 /* Pods_hello5_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hello5_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		916843B21DC475E200BF5550 /* hello5-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "hello5-app.entitlements"; sourceTree = "<group>"; };
 		91824A951DC45DA400615F5B /* hello5-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello5-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91824A981DC45DA400615F5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91824A9A1DC45DA400615F5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +39,8 @@
 		91824AA91DC45DA400615F5B /* hello5-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hello5-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91824AAD1DC45DA400615F5B /* hello5_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hello5_appTests.swift; sourceTree = "<group>"; };
 		91824AAF1DC45DA400615F5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2C79EA8C52D4139C12BD17D /* Pods-hello5-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hello5-app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hello5-app/Pods-hello5-app.debug.xcconfig"; sourceTree = "<group>"; };
+		C74321C1CBBFA43068C1E342 /* Pods-hello5-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hello5-app.release.xcconfig"; path = "Pods/Target Support Files/Pods-hello5-app/Pods-hello5-app.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F86B862F580250F0A9703ECA /* Pods_hello5_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +68,8 @@
 				91824A971DC45DA400615F5B /* hello5-app */,
 				91824AAC1DC45DA400615F5B /* hello5-appTests */,
 				91824A961DC45DA400615F5B /* Products */,
+				976F4353C87766A7D5390667 /* Pods */,
+				A1FCD23C21DC405C60225AD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +85,7 @@
 		91824A971DC45DA400615F5B /* hello5-app */ = {
 			isa = PBXGroup;
 			children = (
+				916843B21DC475E200BF5550 /* hello5-app.entitlements */,
 				91824A981DC45DA400615F5B /* AppDelegate.swift */,
 				91824A9A1DC45DA400615F5B /* ViewController.swift */,
 				91824A9C1DC45DA400615F5B /* Main.storyboard */,
@@ -96,6 +105,23 @@
 			path = "hello5-appTests";
 			sourceTree = "<group>";
 		};
+		976F4353C87766A7D5390667 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2C79EA8C52D4139C12BD17D /* Pods-hello5-app.debug.xcconfig */,
+				C74321C1CBBFA43068C1E342 /* Pods-hello5-app.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A1FCD23C21DC405C60225AD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78E40C9F4A45C39467904738 /* Pods_hello5_app.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +129,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 91824AB21DC45DA400615F5B /* Build configuration list for PBXNativeTarget "hello5-app" */;
 			buildPhases = (
+				D149128D334FCD17D2A3FA99 /* [CP] Check Pods Manifest.lock */,
 				91824A911DC45DA400615F5B /* Sources */,
 				91824A921DC45DA400615F5B /* Frameworks */,
 				91824A931DC45DA400615F5B /* Resources */,
+				1D1FCEC287EFCE2F04D83212 /* [CP] Embed Pods Frameworks */,
+				823CA51462AB537FC0DCCB2E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,6 +177,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 7C247JK57L;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					91824AA81DC45DA400615F5B = {
 						CreatedOnToolsVersion = 8.0;
@@ -195,6 +229,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D1FCEC287EFCE2F04D83212 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hello5-app/Pods-hello5-app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		823CA51462AB537FC0DCCB2E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hello5-app/Pods-hello5-app-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D149128D334FCD17D2A3FA99 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		91824A911DC45DA400615F5B /* Sources */ = {
@@ -337,8 +419,10 @@
 		};
 		91824AB31DC45DA400615F5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2C79EA8C52D4139C12BD17D /* Pods-hello5-app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "hello5-app/hello5-app.entitlements";
 				DEVELOPMENT_TEAM = 7C247JK57L;
 				INFOPLIST_FILE = "hello5-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -350,8 +434,10 @@
 		};
 		91824AB41DC45DA400615F5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C74321C1CBBFA43068C1E342 /* Pods-hello5-app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "hello5-app/hello5-app.entitlements";
 				DEVELOPMENT_TEAM = 7C247JK57L;
 				INFOPLIST_FILE = "hello5-app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -410,6 +496,7 @@
 				91824AB41DC45DA400615F5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		91824AB51DC45DA400615F5B /* Build configuration list for PBXNativeTarget "hello5-appTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +505,7 @@
 				91824AB71DC45DA400615F5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

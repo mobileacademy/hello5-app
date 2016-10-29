@@ -1,0 +1,6 @@
+framework module Pods_hello5_app {
+  umbrella header "Pods-hello5-app-umbrella.h"
+
+  export *
+  module * { export * }
+}
