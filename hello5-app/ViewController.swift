@@ -8,11 +8,14 @@
 
 import UIKit
 import SCFacebook
+import SDWebImage
 
 class ViewController: UIViewController {
     
     var name:String?
-
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var imageUser: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +45,10 @@ class ViewController: UIViewController {
             
             print(name)
             self.name = name
+            self.labelName.text = name;
+            
+            let url = "https://graph.facebook.com/v2.8/"+user_id+"/picture"
+            self.imageUser.sd_setImage(with: URL(string: url))
         })
     }
 
