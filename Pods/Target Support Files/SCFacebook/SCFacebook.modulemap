@@ -1,0 +1,6 @@
+framework module SCFacebook {
+  umbrella header "SCFacebook-umbrella.h"
+
+  export *
+  module * { export * }
+}
