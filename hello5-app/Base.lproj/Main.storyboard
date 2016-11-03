@@ -19,29 +19,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10t-hC-8Zd">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8X4-bh-4xf">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MrZ-AF-K5c">
+                                        <frame key="frameInset" minX="8" minY="20" width="70" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10t-hC-8Zd">
+                                        <frame key="frameInset" minX="93" minY="20" width="179" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sex-Tr-NHQ">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="p0W-y2-F6R"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.43529412150382996" green="0.69803923368453979" blue="0.90980392694473267" alpha="0.22093243927125505" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="146" id="F01-Nb-Svc"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sex-Tr-NHQ" secondAttribute="bottom" constant="12" id="0Lh-ne-mDx"/>
+                                    <constraint firstItem="Sex-Tr-NHQ" firstAttribute="leading" secondItem="8X4-bh-4xf" secondAttribute="leading" constant="93" id="37i-fb-DI8"/>
+                                    <constraint firstAttribute="height" constant="100" id="I43-Pe-nSo"/>
+                                    <constraint firstItem="10t-hC-8Zd" firstAttribute="leading" secondItem="8X4-bh-4xf" secondAttribute="leading" constant="93" id="S3v-RQ-w2i"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sex-Tr-NHQ" secondAttribute="trailing" constant="8" id="i0F-z9-rKu"/>
+                                    <constraint firstAttribute="bottom" secondItem="10t-hC-8Zd" secondAttribute="bottom" constant="53" id="mKO-kc-mLd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MrZ-AF-K5c">
-                                <frame key="frameInset" minX="114" minY="223" width="91" height="92"/>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="10t-hC-8Zd" firstAttribute="top" secondItem="MrZ-AF-K5c" secondAttribute="bottom" constant="8" id="Hm7-JT-mp4"/>
-                            <constraint firstItem="MrZ-AF-K5c" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="98" id="I9c-Q5-Km2"/>
-                            <constraint firstItem="10t-hC-8Zd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Mhm-b6-ioV"/>
-                            <constraint firstItem="10t-hC-8Zd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="THI-fO-7Wr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8X4-bh-4xf" secondAttribute="bottom" id="BiY-Qb-9RA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8X4-bh-4xf" secondAttribute="trailing" constant="-20" id="Jtz-Pw-tEJ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="8X4-bh-4xf" secondAttribute="leading" constant="20" id="pws-ka-amH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="BiY-Qb-9RA" id="4zX-IA-Mx7"/>
                         <outlet property="imageUser" destination="MrZ-AF-K5c" id="ClA-0r-aRP"/>
                         <outlet property="labelName" destination="10t-hC-8Zd" id="wmv-DP-ZTM"/>
+                        <outlet property="textField" destination="Sex-Tr-NHQ" id="wyt-0B-llX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -10,11 +10,15 @@ import UIKit
 import SCFacebook
 import SDWebImage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     var name:String?
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageUser: UIImageView!
+    @IBOutlet weak var textField: UITextField!
+    var messages:[Message] = [Message]()
+    
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +41,13 @@ class ViewController: UIViewController {
         }
         
         Messages.instance.fetchMessages { (messages) in
-            print(messages)
-            print(messages.count)
-            print(messages[0].text)
+            self.messages = messages
         }
+        
+        //
+        self.someKeyboardHooks()
+        textField.delegate = self;
     }
-    
     
     func getFacebookUser (){
         FBSDKGraphRequest.init(graphPath: "me", parameters: nil).start(completionHandler: { (connection, result, error) in
@@ -61,10 +66,63 @@ class ViewController: UIViewController {
         print(FBSDKAccessToken.current().tokenString)
         
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: - keyboard
+    deinit {
+        NotificationCenter.default.removeObserver(self);
+    }
+    
+    func someKeyboardHooks(){
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow),
+                                               name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide),
+                                               name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        //tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func keyboardWillShow(_ notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.bottomConstraint.constant += keyboardSize.height
+            UIView.animate(withDuration: 0.4, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    func keyboardWillHide(_ notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.bottomConstraint.constant -= keyboardSize.height
+            UIView.animate(withDuration: 0.4, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        textField.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let message = Message()
+        message?.user_name = self.name
+        message?.text = textField.text
+        Messages.instance.send(message!) { (message:Message) in
+            print(message)
+        }
+        
+        textField.text = ""
+        return false;
     }
 
 

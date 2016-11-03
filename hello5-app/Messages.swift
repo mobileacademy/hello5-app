@@ -36,7 +36,7 @@ class Message : Mappable{
 class Messages {
     static let instance = Messages()
     
-    func fetchMessages(_ callback:@escaping (_ stories:[Message]) -> Void){
+    func fetchMessages(_ callback:@escaping (_ messages:[Message]) -> Void){
         let url = "https://hello6.herokuapp.com/messages.json"
         
         Alamofire.request(url).responseArray {(response:DataResponse<[Message]>) in
@@ -45,6 +45,15 @@ class Messages {
                 return;
             }
             callback(messages)
+        }
+    }
+    
+    func send(_ message:Message, callback:@escaping (_ message:Message)->Void) {
+        let url = "https://hello6.herokuapp.com/messages.json"
+        let parameters = message.toJSON()
+        Alamofire.request(url, method: .post, parameters:parameters, encoding: JSONEncoding.default).responseObject {
+            (response: DataResponse<Message>) in
+            callback(response.result.value!)
         }
     }
 }
