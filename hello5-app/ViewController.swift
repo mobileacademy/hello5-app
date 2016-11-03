@@ -42,11 +42,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
             }
         }
         
-        Messages.instance.fetchMessages { (messages) in
-            self.messages = messages
-            self.uiUpdateTable()
-        }
-        
+        Timer.scheduledTimer(timeInterval: 1, target: self,
+                             selector: #selector(self.refreshMessages), userInfo: nil, repeats: true)
         //
         self.someKeyboardHooks()
         textField.delegate = self;
@@ -99,9 +96,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
         return cell;
     }
     
+    func refreshMessages(){
+        Messages.instance.fetchMessages { (messages) in
+            self.messages = messages
+            self.uiUpdateTable()
+        }
+    }
+    
     func uiUpdateTable(){
         self.messageList.reloadData()
-        self.messageList.scrollToRow(at: IndexPath.init(row: messages.count-1, section: 0), at: .top, animated: true)
+        if messages.count > 1 {
+            self.messageList.scrollToRow(at: IndexPath.init(row: messages.count-1, section: 0), at: .top, animated: true)
+        }
     }
     
     

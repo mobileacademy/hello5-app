@@ -17,7 +17,6 @@ class Message : Mappable{
     var user_id:String?
     var user_name:String?
     
-    
     required init?(map: Map){
     }
     
