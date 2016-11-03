@@ -15,6 +15,7 @@
 		9106975B1DC4881A007F8DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 910697591DC4881A007F8DAF /* LaunchScreen.storyboard */; };
 		910697661DC4881B007F8DAF /* hello5_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910697651DC4881B007F8DAF /* hello5_appTests.swift */; };
 		910697721DC4A8B7007F8DAF /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910697711DC4A8B7007F8DAF /* Messages.swift */; };
+		9170CE041DCB950E00A38B35 /* guest_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9170CE031DCB950E00A38B35 /* guest_user@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		910697671DC4881B007F8DAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		910697701DC49695007F8DAF /* hello5-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "hello5-app.entitlements"; sourceTree = "<group>"; };
 		910697711DC4A8B7007F8DAF /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		9170CE031DCB950E00A38B35 /* guest_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guest_user@2x.png"; sourceTree = "<group>"; };
 		E5047C5A8EEBC92DD44FF74A /* Pods_hello5_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hello5_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 		9106974F1DC4881A007F8DAF /* hello5-app */ = {
 			isa = PBXGroup;
 			children = (
+				9170CE031DCB950E00A38B35 /* guest_user@2x.png */,
 				910697701DC49695007F8DAF /* hello5-app.entitlements */,
 				910697501DC4881A007F8DAF /* AppDelegate.swift */,
 				910697521DC4881A007F8DAF /* ViewController.swift */,
@@ -218,6 +221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9170CE041DCB950E00A38B35 /* guest_user@2x.png in Resources */,
 				9106975B1DC4881A007F8DAF /* LaunchScreen.storyboard in Resources */,
 				910697581DC4881A007F8DAF /* Assets.xcassets in Resources */,
 				910697561DC4881A007F8DAF /* Main.storyboard in Resources */,

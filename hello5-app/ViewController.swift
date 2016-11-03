@@ -10,15 +10,17 @@ import UIKit
 import SCFacebook
 import SDWebImage
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource {
     
-    var name:String?
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageUser: UIImageView!
     @IBOutlet weak var textField: UITextField!
-    var messages:[Message] = [Message]()
-    
+    @IBOutlet weak var messageList: UITableView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    var user_name:String?
+    var user_id:String?
+    var messages:[Message] = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +44,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         Messages.instance.fetchMessages { (messages) in
             self.messages = messages
+            self.uiUpdateTable()
         }
         
         //
         self.someKeyboardHooks()
         textField.delegate = self;
+        messageList.dataSource = self;
     }
     
     func getFacebookUser (){
@@ -54,9 +58,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let dict = result as! [String : AnyObject]
             let user_id = dict["id"] as! String
             let name = dict["name"] as! String
-            
-            print(name)
-            self.name = name
+
+            self.user_id = user_id
+            self.user_name = name
             self.labelName.text = name;
             
             let url = "https://graph.facebook.com/v2.8/"+user_id+"/picture"
@@ -74,6 +78,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - messages table/list
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.messages.count
+    }
+    
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+        let message = self.messages[indexPath.row]
+        (cell.viewWithTag(902) as! UILabel).text = message.user_name
+        (cell.viewWithTag(903) as! UILabel).text = message.text
+        let uiImageView = cell.viewWithTag(901) as! UIImageView
+        if message.user_id != nil{
+            let url = "https://graph.facebook.com/v2.8/"+message.user_id!+"/picture"
+            uiImageView.sd_setImage(with: URL(string: url))
+        }else{
+            uiImageView.image = UIImage.init(named:"guest_user");
+        }
+        return cell;
+    }
+    
+    func uiUpdateTable(){
+        self.messageList.reloadData()
+        self.messageList.scrollToRow(at: IndexPath.init(row: messages.count-1, section: 0), at: .top, animated: true)
+    }
+    
     
     // MARK: - keyboard
     deinit {
@@ -81,9 +111,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func someKeyboardHooks(){
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow),
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillChange),
                                                name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide),
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillChange),
                                                name:NSNotification.Name.UIKeyboardWillHide, object: nil);
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
@@ -91,23 +121,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap)
     }
     
-    func keyboardWillShow(_ notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.bottomConstraint.constant += keyboardSize.height
-            UIView.animate(withDuration: 0.4, animations: { () -> Void in
-                self.view.layoutIfNeeded()
-            })
-        }
+    func keyboardWillChange(_ notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        let moveUp = (notification.name == NSNotification.Name.UIKeyboardWillShow)
+
+        self.bottomConstraint.constant += moveUp ? keyboardHeight : -keyboardHeight
+        UIView.animate(withDuration: duration, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            
+        })
+        self.uiUpdateTable()
     }
     
-    func keyboardWillHide(_ notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.bottomConstraint.constant -= keyboardSize.height
-            UIView.animate(withDuration: 0.4, animations: { () -> Void in
-                self.view.layoutIfNeeded()
-            })
-        }
-    }
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         textField.endEditing(true)
@@ -115,10 +142,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let message = Message()
-        message?.user_name = self.name
+        message?.user_name = self.user_name
         message?.text = textField.text
+        message?.user_id = self.user_id
         Messages.instance.send(message!) { (message:Message) in
-            print(message)
+            self.messages.append(message)
+            self.uiUpdateTable()
         }
         
         textField.text = ""
