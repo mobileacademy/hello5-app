@@ -132,9 +132,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
         let begin = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue)
         let end = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue)
         let deltaHeight = (end.cgRectValue.origin.y+end.cgRectValue.height) - (begin.cgRectValue.origin.y+begin.cgRectValue.height)
-        print(deltaHeight)
+        //print(deltaHeight)
         let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
-        let moveUp = (notification.name == NSNotification.Name.UIKeyboardWillShow)
 
         self.bottomConstraint.constant -= deltaHeight;
         UIView.animate(withDuration: duration, animations: { () -> Void in

@@ -35,10 +35,15 @@ class Message : Mappable{
 class Messages {
     static let instance = Messages()
     
+    var myPushToken:String?
+    
     func fetchMessages(_ callback:@escaping (_ messages:[Message]) -> Void){
         let url = "https://hello6.herokuapp.com/messages.json"
-        
-        Alamofire.request(url).responseArray {(response:DataResponse<[Message]>) in
+        var headers:HTTPHeaders = [:]
+        if self.myPushToken != nil {
+            headers["X-Push-Token"] = self.myPushToken!
+        }
+        Alamofire.request(url, headers:headers).responseArray {(response:DataResponse<[Message]>) in
             guard let messages = response.result.value else {
                 callback([]);
                 return;
