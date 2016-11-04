@@ -129,11 +129,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
     
     func keyboardWillChange(_ notification: NSNotification) {
         let userInfo = notification.userInfo!
-        let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        let begin = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue)
+        let end = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue)
+        let deltaHeight = (end.cgRectValue.origin.y+end.cgRectValue.height) - (begin.cgRectValue.origin.y+begin.cgRectValue.height)
+        print(deltaHeight)
         let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
         let moveUp = (notification.name == NSNotification.Name.UIKeyboardWillShow)
 
-        self.bottomConstraint.constant += moveUp ? keyboardHeight : -keyboardHeight
+        self.bottomConstraint.constant -= deltaHeight;
         UIView.animate(withDuration: duration, animations: { () -> Void in
             self.view.layoutIfNeeded()
             
