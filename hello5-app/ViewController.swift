@@ -10,12 +10,14 @@ import UIKit
 import SCFacebook
 import SDWebImage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     var name:String?
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageUser: UIImageView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,7 @@ class ViewController: UIViewController {
         }
         
         self.someKeyboardHooks()
+        textField.delegate = self;
     }
     
     
@@ -101,7 +104,23 @@ class ViewController: UIViewController {
     
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        //textField.endEditing(true)
+        textField.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        let message = Message()
+//        message?.user_name = self.user_name
+//        message?.text = textField.text
+//        message?.user_id = self.user_id
+//        Messages.instance.send(message!) { (message:Message) in
+//            self.messages.append(message)
+//            self.uiUpdateTable()
+//        }
+        
+        print(textField.text)
+        
+        textField.text = ""
+        return false;
     }
 
 }
