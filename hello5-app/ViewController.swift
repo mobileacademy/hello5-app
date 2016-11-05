@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var name:String?
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageUser: UIImageView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,8 @@ class ViewController: UIViewController {
             print(messages.count)
             print(messages[0].text)
         }
+        
+        self.someKeyboardHooks()
     }
     
     
@@ -67,6 +70,39 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    // MARK: - keyboard 
+    func someKeyboardHooks(){
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillChange),
+                                               name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillChange),
+                                               name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard))
+        //tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func keyboardWillChange(_ notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let begin = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue)
+        let end = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue)
+        let deltaHeight = (end.cgRectValue.origin.y+end.cgRectValue.height) - (begin.cgRectValue.origin.y+begin.cgRectValue.height)
+        //print(deltaHeight)
+        let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        
+        self.bottomConstraint.constant -= deltaHeight;
+        UIView.animate(withDuration: duration, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            
+        })
+        //self.uiUpdateTable()
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        //textField.endEditing(true)
+    }
 
 }
 
