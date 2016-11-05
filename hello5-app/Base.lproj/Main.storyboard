@@ -60,11 +60,49 @@
                                     <constraint firstItem="MrZ-AF-K5c" firstAttribute="leading" secondItem="fwL-MD-JzC" secondAttribute="leadingMargin" id="pC7-6J-9wk"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jJP-vL-bln">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="543"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="61" id="Kas-QE-KEI">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="61"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kas-QE-KEI" id="O4e-NX-0a1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="901" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HCk-9u-eWL">
+                                                    <rect key="frame" x="8" y="0.0" width="68" height="52"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="902" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZz-y4-cSs">
+                                                    <rect key="frame" x="84" y="0.0" width="105" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="903" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Io5-hi-Fqh">
+                                                    <rect key="frame" x="84" y="29" width="230" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fwL-MD-JzC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1y0-3I-Hms"/>
+                            <constraint firstItem="jJP-vL-bln" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="7px-7G-FNQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jJP-vL-bln" secondAttribute="trailing" constant="-16" id="CoM-WB-KhP"/>
                             <constraint firstItem="fwL-MD-JzC" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="JCj-Un-eVC"/>
+                            <constraint firstItem="jJP-vL-bln" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="OU1-Ph-W8y"/>
+                            <constraint firstItem="fwL-MD-JzC" firstAttribute="top" secondItem="jJP-vL-bln" secondAttribute="bottom" constant="8" id="qEf-bM-Abs"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fwL-MD-JzC" secondAttribute="bottom" id="sRx-bS-1zx"/>
                         </constraints>
                     </view>
@@ -72,6 +110,7 @@
                         <outlet property="bottomConstraint" destination="sRx-bS-1zx" id="JNV-AX-xQO"/>
                         <outlet property="imageUser" destination="MrZ-AF-K5c" id="ClA-0r-aRP"/>
                         <outlet property="labelName" destination="10t-hC-8Zd" id="wmv-DP-ZTM"/>
+                        <outlet property="messageList" destination="jJP-vL-bln" id="f8v-fw-COR"/>
                         <outlet property="textField" destination="Gix-oo-NB6" id="uNP-vV-TE1"/>
                     </connections>
                 </viewController>

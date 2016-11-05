@@ -10,7 +10,7 @@ import UIKit
 import SCFacebook
 import SDWebImage
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource {
     
     var name:String?
     @IBOutlet weak var labelName: UILabel!
@@ -18,6 +18,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var textField: UITextField!
+    
+    @IBOutlet weak var messageList: UITableView!
+    
+    var user_name:String?
+    var user_id:String?
+    var messages:[Message] = [Message]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +45,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        Messages.instance.fetchMessages { (messages) in
-            print(messages)
-            print(messages.count)
-            print(messages[0].text)
-        }
-        
         self.someKeyboardHooks()
         textField.delegate = self;
+        messageList.dataSource = self;
+        
+        Timer.scheduledTimer(timeInterval: 1, target: self,
+                             selector: #selector(self.refreshMessages), userInfo: nil, repeats: true)
     }
     
     
@@ -67,6 +71,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
         print(FBSDKAccessToken.current().tokenString)
         
     }
+    
+    // MARK: - messages
+    func refreshMessages(){
+        Messages.instance.fetchMessages { (messages) in
+            self.messages = messages
+            self.uiUpdateTable()
+        }
+    }
+    
+    func uiUpdateTable(){
+        self.messageList.reloadData()
+        if messages.count > 1 {
+            self.messageList.scrollToRow(at: IndexPath.init(row: messages.count-1, section: 0), at: .top, animated: true)
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.messages.count
+    }
+    
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+        let message = self.messages[indexPath.row]
+        (cell.viewWithTag(902) as! UILabel).text = message.user_name
+        (cell.viewWithTag(903) as! UILabel).text = message.text
+        let uiImageView = cell.viewWithTag(901) as! UIImageView
+        if message.user_id != nil{
+            let url = "https://graph.facebook.com/v2.8/"+message.user_id!+"/picture"
+            uiImageView.sd_setImage(with: URL(string: url))
+        }else{
+            uiImageView.image = UIImage.init(named:"guest_user");
+        }
+        return cell;
+    }
+    
+    // MARK: - other
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -99,7 +140,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.view.layoutIfNeeded()
             
         })
-        //self.uiUpdateTable()
+        self.uiUpdateTable()
     }
     
     func dismissKeyboard() {
@@ -117,7 +158,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //            self.uiUpdateTable()
 //        }
         
-        print(textField.text)
         
         textField.text = ""
         return false;
