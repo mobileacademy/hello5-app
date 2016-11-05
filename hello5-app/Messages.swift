@@ -17,7 +17,6 @@ class Message : Mappable{
     var user_id:String?
     var user_name:String?
     
-    
     required init?(map: Map){
     }
     
@@ -45,6 +44,15 @@ class Messages {
                 return;
             }
             callback(messages)
+        }
+    }
+    
+    func send(_ message:Message, callback:@escaping (_ message:Message)->Void) {
+        let url = "https://hello6.herokuapp.com/messages.json"
+        let parameters = message.toJSON()
+        Alamofire.request(url, method: .post, parameters:parameters, encoding: JSONEncoding.default).responseObject {
+            (response: DataResponse<Message>) in
+            callback(response.result.value!)
         }
     }
 }

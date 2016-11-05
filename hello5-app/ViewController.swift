@@ -66,6 +66,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
             
             let url = "https://graph.facebook.com/v2.8/"+user_id+"/picture"
             self.imageUser.sd_setImage(with: URL(string: url))
+            
+            self.user_id = user_id
+            self.user_name = name
         })
         
         print(FBSDKAccessToken.current().tokenString)
@@ -149,14 +152,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        let message = Message()
-//        message?.user_name = self.user_name
-//        message?.text = textField.text
-//        message?.user_id = self.user_id
-//        Messages.instance.send(message!) { (message:Message) in
-//            self.messages.append(message)
-//            self.uiUpdateTable()
-//        }
+        let message = Message()
+        message?.user_name = self.user_name
+        message?.text = textField.text
+        message?.user_id = self.user_id
+        Messages.instance.send(message!) { (message:Message) in
+            self.messages.append(message)
+            self.uiUpdateTable()
+        }
         
         
         textField.text = ""
